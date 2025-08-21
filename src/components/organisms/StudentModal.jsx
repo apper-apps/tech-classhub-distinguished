@@ -124,7 +124,7 @@ if (!formData.first_name_c.trim()) {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = async (e) => {
+const handleSubmit = async (e) => {
     e.preventDefault();
     
     if (!validateForm()) {
@@ -133,14 +133,20 @@ if (!formData.first_name_c.trim()) {
 
     setLoading(true);
     try {
-if (isEditing) {
+      // Convert marks to integer to match database field type
+      const processedData = {
+        ...formData,
+        marks_c: formData.marks_c ? parseInt(formData.marks_c, 10) : null
+      };
+
+      if (isEditing) {
         // Update existing student
-        await studentService.update(student.Id, formData);
+        await studentService.update(student.Id, processedData);
         toast.success("Student updated successfully!");
       } else {
         // Create new student
         const studentData = {
-          ...formData,
+          ...processedData,
           enrollment_date_c: new Date().toISOString().split("T")[0]
         };
         await studentService.create(studentData);
