@@ -20,14 +20,27 @@ const params = {
         ]
       };
 
-      const response = await apperClient.fetchRecords('student_c', params);
+const response = await apperClient.fetchRecords('student_c', params);
       
       if (!response.success) {
         console.error(response.message);
         throw new Error(response.message);
       }
       
-      return response.data || [];
+      // Transform database field names to UI property names
+      const transformedData = (response.data || []).map(student => ({
+        Id: student.Id,
+        firstName: student.first_name_c,
+        lastName: student.last_name_c,
+        email: student.email_c,
+        phone: student.phone_c,
+        dateOfBirth: student.date_of_birth_c,
+        enrollmentDate: student.enrollment_date_c,
+        gradeLevel: student.grade_level_c,
+        status: student.status_c
+      }));
+      
+      return transformedData;
     } catch (error) {
       if (error?.response?.data?.message) {
         console.error("Error fetching students:", error?.response?.data?.message);
@@ -59,14 +72,30 @@ const params = {
         ]
       };
 
-      const response = await apperClient.getRecordById('student_c', parseInt(id), params);
+const response = await apperClient.getRecordById('student_c', parseInt(id), params);
       
       if (!response.success) {
         console.error(response.message);
         throw new Error(response.message);
       }
       
-      return response.data;
+      // Transform database field names to UI property names
+      const student = response.data;
+      if (student) {
+        return {
+          Id: student.Id,
+          firstName: student.first_name_c,
+          lastName: student.last_name_c,
+          email: student.email_c,
+          phone: student.phone_c,
+          dateOfBirth: student.date_of_birth_c,
+          enrollmentDate: student.enrollment_date_c,
+          gradeLevel: student.grade_level_c,
+          status: student.status_c
+        };
+      }
+      
+      return null;
     } catch (error) {
       if (error?.response?.data?.message) {
         console.error(`Error fetching student with ID ${id}:`, error?.response?.data?.message);
@@ -110,7 +139,21 @@ const params = {
           });
         }
         
-        return successfulRecords.length > 0 ? successfulRecords[0].data : null;
+if (successfulRecords.length > 0) {
+          const student = successfulRecords[0].data;
+          return {
+            Id: student.Id,
+            firstName: student.first_name_c,
+            lastName: student.last_name_c,
+            email: student.email_c,
+            phone: student.phone_c,
+            dateOfBirth: student.date_of_birth_c,
+            enrollmentDate: student.enrollment_date_c,
+            gradeLevel: student.grade_level_c,
+            status: student.status_c
+          };
+        }
+        return null;
       }
     } catch (error) {
       if (error?.response?.data?.message) {
@@ -158,7 +201,21 @@ const params = {
           });
         }
         
-        return successfulRecords.length > 0 ? successfulRecords[0].data : null;
+if (successfulRecords.length > 0) {
+          const student = successfulRecords[0].data;
+          return {
+            Id: student.Id,
+            firstName: student.first_name_c,
+            lastName: student.last_name_c,
+            email: student.email_c,
+            phone: student.phone_c,
+            dateOfBirth: student.date_of_birth_c,
+            enrollmentDate: student.enrollment_date_c,
+            gradeLevel: student.grade_level_c,
+            status: student.status_c
+          };
+        }
+        return null;
       }
     } catch (error) {
       if (error?.response?.data?.message) {

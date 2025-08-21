@@ -112,10 +112,10 @@ const StudentTable = ({ students = [], onStudentUpdated, onStudentDeleted }) => 
                     </div>
                   </div>
                 </td>
-                <td className="py-4 px-4">
+<td className="py-4 px-4">
                   <div className="text-sm">
-                    <div className="text-gray-900">{student.email}</div>
-                    <div className="text-secondary-500">{student.phone}</div>
+                    <div className="text-gray-900">{student.email || 'No email'}</div>
+                    <div className="text-secondary-500">{student.phone || 'No phone'}</div>
                   </div>
                 </td>
                 <td className="py-4 px-4">
