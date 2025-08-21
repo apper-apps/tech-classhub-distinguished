@@ -7,17 +7,17 @@ const studentService = {
         apperPublicKey: import.meta.env.VITE_APPER_PUBLIC_KEY
       });
 
-      const params = {
+const params = {
         fields: [
-          { field: { Name: "firstName" } },
-          { field: { Name: "lastName" } },
-          { field: { Name: "email" } },
-          { field: { Name: "phone" } },
-          { field: { Name: "dateOfBirth" } },
-          { field: { Name: "enrollmentDate" } },
-          { field: { Name: "gradeLevel" } },
-          { field: { Name: "status" } }
-]
+          { field: { Name: "first_name_c" } },
+          { field: { Name: "last_name_c" } },
+          { field: { Name: "email_c" } },
+          { field: { Name: "phone_c" } },
+          { field: { Name: "date_of_birth_c" } },
+          { field: { Name: "enrollment_date_c" } },
+          { field: { Name: "grade_level_c" } },
+          { field: { Name: "status_c" } }
+        ]
       };
 
       const response = await apperClient.fetchRecords('student_c', params);
@@ -46,18 +46,18 @@ const studentService = {
         apperPublicKey: import.meta.env.VITE_APPER_PUBLIC_KEY
       });
 
-      const params = {
+const params = {
         fields: [
-          { field: { Name: "firstName" } },
-          { field: { Name: "lastName" } },
-          { field: { Name: "email" } },
-          { field: { Name: "phone" } },
-          { field: { Name: "dateOfBirth" } },
-          { field: { Name: "enrollmentDate" } },
-          { field: { Name: "gradeLevel" } },
-          { field: { Name: "status" } }
+          { field: { Name: "first_name_c" } },
+          { field: { Name: "last_name_c" } },
+          { field: { Name: "email_c" } },
+          { field: { Name: "phone_c" } },
+          { field: { Name: "date_of_birth_c" } },
+          { field: { Name: "enrollment_date_c" } },
+          { field: { Name: "grade_level_c" } },
+          { field: { Name: "status_c" } }
         ]
-};
+      };
 
       const response = await apperClient.getRecordById('student_c', parseInt(id), params);
       
@@ -85,9 +85,9 @@ const studentService = {
         apperPublicKey: import.meta.env.VITE_APPER_PUBLIC_KEY
       });
 
-      const params = {
+const params = {
         records: [studentData]
-};
+      };
 
       const response = await apperClient.createRecord('student_c', params);
       
@@ -130,12 +130,12 @@ const studentService = {
         apperPublicKey: import.meta.env.VITE_APPER_PUBLIC_KEY
       });
 
-      const params = {
+const params = {
         records: [{
           Id: parseInt(id),
           ...studentData
         }]
-};
+      };
 
       const response = await apperClient.updateRecord('student_c', params);
       
@@ -182,7 +182,7 @@ const studentService = {
         RecordIds: [parseInt(id)]
       };
 
-      const response = await apperClient.deleteRecord('Students', params);
+const response = await apperClient.deleteRecord('student_c', params);
       
       if (!response.success) {
         console.error(response.message);

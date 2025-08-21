@@ -7,16 +7,16 @@ const attendanceService = {
         apperPublicKey: import.meta.env.VITE_APPER_PUBLIC_KEY
       });
 
-      const params = {
+const params = {
         fields: [
-          { field: { Name: "studentId" } },
-          { field: { Name: "date" } },
-          { field: { Name: "status" } },
-          { field: { Name: "notes" } }
+          { field: { Name: "student_id_c" } },
+          { field: { Name: "date_c" } },
+          { field: { Name: "status_c" } },
+          { field: { Name: "notes_c" } }
         ]
       };
 
-      const response = await apperClient.fetchRecords('Attendance', params);
+      const response = await apperClient.fetchRecords('attendance_c', params);
       
       if (!response.success) {
         console.error(response.message);
@@ -42,16 +42,16 @@ const attendanceService = {
         apperPublicKey: import.meta.env.VITE_APPER_PUBLIC_KEY
       });
 
-      const params = {
+const params = {
         fields: [
-          { field: { Name: "studentId" } },
-          { field: { Name: "date" } },
-          { field: { Name: "status" } },
-          { field: { Name: "notes" } }
+          { field: { Name: "student_id_c" } },
+          { field: { Name: "date_c" } },
+          { field: { Name: "status_c" } },
+          { field: { Name: "notes_c" } }
         ]
       };
 
-      const response = await apperClient.getRecordById('Attendance', parseInt(id), params);
+      const response = await apperClient.getRecordById('attendance_c', parseInt(id), params);
       
       if (!response.success) {
         console.error(response.message);
@@ -81,7 +81,7 @@ const attendanceService = {
         records: [attendanceData]
       };
 
-      const response = await apperClient.createRecord('Attendance', params);
+const response = await apperClient.createRecord('attendance_c', params);
       
       if (!response.success) {
         console.error(response.message);
@@ -129,7 +129,7 @@ const attendanceService = {
         }]
       };
 
-      const response = await apperClient.updateRecord('Attendance', params);
+const response = await apperClient.updateRecord('attendance_c', params);
       
       if (!response.success) {
         console.error(response.message);
@@ -174,7 +174,7 @@ const attendanceService = {
         RecordIds: [parseInt(id)]
       };
 
-      const response = await apperClient.deleteRecord('Attendance', params);
+const response = await apperClient.deleteRecord('attendance_c', params);
       
       if (!response.success) {
         console.error(response.message);

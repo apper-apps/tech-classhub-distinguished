@@ -7,15 +7,15 @@ const gradeService = {
         apperPublicKey: import.meta.env.VITE_APPER_PUBLIC_KEY
       });
 
-      const params = {
+const params = {
         fields: [
-          { field: { Name: "studentId" } },
-          { field: { Name: "assignmentId" } },
-          { field: { Name: "score" } },
-          { field: { Name: "submittedDate" } },
-          { field: { Name: "comments" } }
+          { field: { Name: "student_id_c" } },
+          { field: { Name: "assignment_id_c" } },
+          { field: { Name: "score_c" } },
+          { field: { Name: "submitted_date_c" } },
+          { field: { Name: "comments_c" } }
         ]
-};
+      };
 
       const response = await apperClient.fetchRecords('grade_c', params);
       
@@ -43,15 +43,15 @@ const gradeService = {
         apperPublicKey: import.meta.env.VITE_APPER_PUBLIC_KEY
       });
 
-      const params = {
+const params = {
         fields: [
-          { field: { Name: "studentId" } },
-          { field: { Name: "assignmentId" } },
-          { field: { Name: "score" } },
-          { field: { Name: "submittedDate" } },
-          { field: { Name: "comments" } }
+          { field: { Name: "student_id_c" } },
+          { field: { Name: "assignment_id_c" } },
+          { field: { Name: "score_c" } },
+          { field: { Name: "submitted_date_c" } },
+          { field: { Name: "comments_c" } }
         ]
-};
+      };
 
       const response = await apperClient.getRecordById('grade_c', parseInt(id), params);
       
@@ -79,9 +79,9 @@ const gradeService = {
         apperPublicKey: import.meta.env.VITE_APPER_PUBLIC_KEY
       });
 
-      const params = {
+const params = {
         records: [gradeData]
-};
+      };
 
       const response = await apperClient.createRecord('grade_c', params);
       
@@ -124,12 +124,12 @@ const gradeService = {
         apperPublicKey: import.meta.env.VITE_APPER_PUBLIC_KEY
       });
 
-      const params = {
+const params = {
         records: [{
           Id: parseInt(id),
           ...gradeData
         }]
-};
+      };
 
       const response = await apperClient.updateRecord('grade_c', params);
       
@@ -172,9 +172,9 @@ const gradeService = {
         apperPublicKey: import.meta.env.VITE_APPER_PUBLIC_KEY
       });
 
-      const params = {
+const params = {
         RecordIds: [parseInt(id)]
-};
+      };
 
       const response = await apperClient.deleteRecord('grade_c', params);
       

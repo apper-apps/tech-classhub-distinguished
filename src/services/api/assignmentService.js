@@ -7,17 +7,17 @@ const assignmentService = {
         apperPublicKey: import.meta.env.VITE_APPER_PUBLIC_KEY
       });
 
-      const params = {
+const params = {
         fields: [
-          { field: { Name: "title" } },
-          { field: { Name: "category" } },
-          { field: { Name: "totalPoints" } },
-          { field: { Name: "dueDate" } },
-          { field: { Name: "description" } }
+          { field: { Name: "title_c" } },
+          { field: { Name: "category_c" } },
+          { field: { Name: "total_points_c" } },
+          { field: { Name: "due_date_c" } },
+          { field: { Name: "description_c" } }
         ]
       };
 
-      const response = await apperClient.fetchRecords('Assignments', params);
+      const response = await apperClient.fetchRecords('assignment_c', params);
       
       if (!response.success) {
         console.error(response.message);
@@ -43,17 +43,17 @@ const assignmentService = {
         apperPublicKey: import.meta.env.VITE_APPER_PUBLIC_KEY
       });
 
-      const params = {
+const params = {
         fields: [
-          { field: { Name: "title" } },
-          { field: { Name: "category" } },
-          { field: { Name: "totalPoints" } },
-          { field: { Name: "dueDate" } },
-          { field: { Name: "description" } }
+          { field: { Name: "title_c" } },
+          { field: { Name: "category_c" } },
+          { field: { Name: "total_points_c" } },
+          { field: { Name: "due_date_c" } },
+          { field: { Name: "description_c" } }
         ]
       };
 
-      const response = await apperClient.getRecordById('Assignments', parseInt(id), params);
+      const response = await apperClient.getRecordById('assignment_c', parseInt(id), params);
       
       if (!response.success) {
         console.error(response.message);
@@ -83,7 +83,7 @@ const assignmentService = {
         records: [assignmentData]
       };
 
-      const response = await apperClient.createRecord('Assignments', params);
+const response = await apperClient.createRecord('assignment_c', params);
       
       if (!response.success) {
         console.error(response.message);
@@ -131,7 +131,7 @@ const assignmentService = {
         }]
       };
 
-      const response = await apperClient.updateRecord('Assignments', params);
+const response = await apperClient.updateRecord('assignment_c', params);
       
       if (!response.success) {
         console.error(response.message);
@@ -176,7 +176,7 @@ const assignmentService = {
         RecordIds: [parseInt(id)]
       };
 
-      const response = await apperClient.deleteRecord('Assignments', params);
+const response = await apperClient.deleteRecord('assignment_c', params);
       
       if (!response.success) {
         console.error(response.message);
