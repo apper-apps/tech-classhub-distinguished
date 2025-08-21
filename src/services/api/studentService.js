@@ -17,10 +17,10 @@ const studentService = {
           { field: { Name: "enrollmentDate" } },
           { field: { Name: "gradeLevel" } },
           { field: { Name: "status" } }
-        ]
+]
       };
 
-      const response = await apperClient.fetchRecords('Students', params);
+      const response = await apperClient.fetchRecords('student_c', params);
       
       if (!response.success) {
         console.error(response.message);
@@ -57,9 +57,9 @@ const studentService = {
           { field: { Name: "gradeLevel" } },
           { field: { Name: "status" } }
         ]
-      };
+};
 
-      const response = await apperClient.getRecordById('Students', parseInt(id), params);
+      const response = await apperClient.getRecordById('student_c', parseInt(id), params);
       
       if (!response.success) {
         console.error(response.message);
@@ -87,9 +87,9 @@ const studentService = {
 
       const params = {
         records: [studentData]
-      };
+};
 
-      const response = await apperClient.createRecord('Students', params);
+      const response = await apperClient.createRecord('student_c', params);
       
       if (!response.success) {
         console.error(response.message);
@@ -135,9 +135,9 @@ const studentService = {
           Id: parseInt(id),
           ...studentData
         }]
-      };
+};
 
-      const response = await apperClient.updateRecord('Students', params);
+      const response = await apperClient.updateRecord('student_c', params);
       
       if (!response.success) {
         console.error(response.message);

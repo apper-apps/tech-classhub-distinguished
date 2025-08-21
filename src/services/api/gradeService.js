@@ -15,9 +15,9 @@ const gradeService = {
           { field: { Name: "submittedDate" } },
           { field: { Name: "comments" } }
         ]
-      };
+};
 
-      const response = await apperClient.fetchRecords('Grades', params);
+      const response = await apperClient.fetchRecords('grade_c', params);
       
       if (!response.success) {
         console.error(response.message);
@@ -51,9 +51,9 @@ const gradeService = {
           { field: { Name: "submittedDate" } },
           { field: { Name: "comments" } }
         ]
-      };
+};
 
-      const response = await apperClient.getRecordById('Grades', parseInt(id), params);
+      const response = await apperClient.getRecordById('grade_c', parseInt(id), params);
       
       if (!response.success) {
         console.error(response.message);
@@ -81,9 +81,9 @@ const gradeService = {
 
       const params = {
         records: [gradeData]
-      };
+};
 
-      const response = await apperClient.createRecord('Grades', params);
+      const response = await apperClient.createRecord('grade_c', params);
       
       if (!response.success) {
         console.error(response.message);
@@ -129,9 +129,9 @@ const gradeService = {
           Id: parseInt(id),
           ...gradeData
         }]
-      };
+};
 
-      const response = await apperClient.updateRecord('Grades', params);
+      const response = await apperClient.updateRecord('grade_c', params);
       
       if (!response.success) {
         console.error(response.message);
@@ -174,9 +174,9 @@ const gradeService = {
 
       const params = {
         RecordIds: [parseInt(id)]
-      };
+};
 
-      const response = await apperClient.deleteRecord('Grades', params);
+      const response = await apperClient.deleteRecord('grade_c', params);
       
       if (!response.success) {
         console.error(response.message);
