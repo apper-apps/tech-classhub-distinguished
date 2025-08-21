@@ -1,9 +1,12 @@
-import { useState } from "react";
+import React, { useContext, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { AuthContext } from "@/App";
 import ApperIcon from "@/components/ApperIcon";
-import Button from "@/components/atoms/Button";
+import UserProfile from "@/components/molecules/UserProfile";
+import LogoutButton from "@/components/atoms/LogoutButton";
 import SearchBar from "@/components/molecules/SearchBar";
+import Button from "@/components/atoms/Button";
 import Avatar from "@/components/atoms/Avatar";
-
 const Header = ({ onMobileMenuToggle }) => {
   const [searchQuery, setSearchQuery] = useState("");
 
@@ -40,20 +43,13 @@ const Header = ({ onMobileMenuToggle }) => {
             <span className="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full"></span>
           </Button>
           
-          {/* User Profile */}
+{/* User Profile */}
           <div className="flex items-center space-x-3">
-            <Avatar
-              initials="JD"
-              size="md"
-            />
-            <div className="hidden md:block">
-              <p className="text-sm font-medium text-gray-900">Jane Doe</p>
-              <p className="text-xs text-gray-500">Mathematics Teacher</p>
-            </div>
-          </div>
+            <UserProfile />
+            <LogoutButton />
+</div>
         </div>
       </div>
-
       {/* Mobile Search */}
       <div className="sm:hidden mt-4">
         <SearchBar

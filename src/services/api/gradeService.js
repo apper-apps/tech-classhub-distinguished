@@ -1,55 +1,211 @@
-import gradesData from "@/services/mockData/grades.json";
-
-let grades = [...gradesData];
-
-const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
-
 const gradeService = {
   async getAll() {
-    await delay(300);
-    return [...grades];
+    try {
+      const { ApperClient } = window.ApperSDK;
+      const apperClient = new ApperClient({
+        apperProjectId: import.meta.env.VITE_APPER_PROJECT_ID,
+        apperPublicKey: import.meta.env.VITE_APPER_PUBLIC_KEY
+      });
+
+      const params = {
+        fields: [
+          { field: { Name: "studentId" } },
+          { field: { Name: "assignmentId" } },
+          { field: { Name: "score" } },
+          { field: { Name: "submittedDate" } },
+          { field: { Name: "comments" } }
+        ]
+      };
+
+      const response = await apperClient.fetchRecords('Grades', params);
+      
+      if (!response.success) {
+        console.error(response.message);
+        throw new Error(response.message);
+      }
+      
+      return response.data || [];
+    } catch (error) {
+      if (error?.response?.data?.message) {
+        console.error("Error fetching grades:", error?.response?.data?.message);
+      } else {
+        console.error(error);
+      }
+      throw error;
+    }
   },
 
   async getById(id) {
-    await delay(200);
-    const grade = grades.find(g => g.Id === parseInt(id));
-    if (!grade) {
-      throw new Error("Grade not found");
+    try {
+      const { ApperClient } = window.ApperSDK;
+      const apperClient = new ApperClient({
+        apperProjectId: import.meta.env.VITE_APPER_PROJECT_ID,
+        apperPublicKey: import.meta.env.VITE_APPER_PUBLIC_KEY
+      });
+
+      const params = {
+        fields: [
+          { field: { Name: "studentId" } },
+          { field: { Name: "assignmentId" } },
+          { field: { Name: "score" } },
+          { field: { Name: "submittedDate" } },
+          { field: { Name: "comments" } }
+        ]
+      };
+
+      const response = await apperClient.getRecordById('Grades', parseInt(id), params);
+      
+      if (!response.success) {
+        console.error(response.message);
+        throw new Error(response.message);
+      }
+      
+      return response.data;
+    } catch (error) {
+      if (error?.response?.data?.message) {
+        console.error(`Error fetching grade with ID ${id}:`, error?.response?.data?.message);
+      } else {
+        console.error(error);
+      }
+      throw error;
     }
-    return { ...grade };
   },
 
   async create(gradeData) {
-    await delay(400);
-    const maxId = grades.reduce((max, g) => Math.max(max, g.Id), 0);
-    const newGrade = {
-      Id: maxId + 1,
-      ...gradeData
-    };
-    grades.push(newGrade);
-    return { ...newGrade };
+    try {
+      const { ApperClient } = window.ApperSDK;
+      const apperClient = new ApperClient({
+        apperProjectId: import.meta.env.VITE_APPER_PROJECT_ID,
+        apperPublicKey: import.meta.env.VITE_APPER_PUBLIC_KEY
+      });
+
+      const params = {
+        records: [gradeData]
+      };
+
+      const response = await apperClient.createRecord('Grades', params);
+      
+      if (!response.success) {
+        console.error(response.message);
+        throw new Error(response.message);
+      }
+
+      if (response.results) {
+        const successfulRecords = response.results.filter(result => result.success);
+        const failedRecords = response.results.filter(result => !result.success);
+        
+        if (failedRecords.length > 0) {
+          console.error(`Failed to create grades ${failedRecords.length} records:${JSON.stringify(failedRecords)}`);
+          
+          failedRecords.forEach(record => {
+            record.errors?.forEach(error => {
+              console.error(`${error.fieldLabel}: ${error}`);
+            });
+          });
+        }
+        
+        return successfulRecords.length > 0 ? successfulRecords[0].data : null;
+      }
+    } catch (error) {
+      if (error?.response?.data?.message) {
+        console.error("Error creating grade:", error?.response?.data?.message);
+      } else {
+        console.error(error);
+      }
+      throw error;
+    }
   },
 
   async update(id, gradeData) {
-    await delay(300);
-    const index = grades.findIndex(g => g.Id === parseInt(id));
-    if (index === -1) {
-      throw new Error("Grade not found");
+    try {
+      const { ApperClient } = window.ApperSDK;
+      const apperClient = new ApperClient({
+        apperProjectId: import.meta.env.VITE_APPER_PROJECT_ID,
+        apperPublicKey: import.meta.env.VITE_APPER_PUBLIC_KEY
+      });
+
+      const params = {
+        records: [{
+          Id: parseInt(id),
+          ...gradeData
+        }]
+      };
+
+      const response = await apperClient.updateRecord('Grades', params);
+      
+      if (!response.success) {
+        console.error(response.message);
+        throw new Error(response.message);
+      }
+
+      if (response.results) {
+        const successfulRecords = response.results.filter(result => result.success);
+        const failedRecords = response.results.filter(result => !result.success);
+        
+        if (failedRecords.length > 0) {
+          console.error(`Failed to update grades ${failedRecords.length} records:${JSON.stringify(failedRecords)}`);
+          
+          failedRecords.forEach(record => {
+            record.errors?.forEach(error => {
+              console.error(`${error.fieldLabel}: ${error}`);
+            });
+          });
+        }
+        
+        return successfulRecords.length > 0 ? successfulRecords[0].data : null;
+      }
+    } catch (error) {
+      if (error?.response?.data?.message) {
+        console.error("Error updating grade:", error?.response?.data?.message);
+      } else {
+        console.error(error);
+      }
+      throw error;
     }
-    grades[index] = { ...grades[index], ...gradeData };
-    return { ...grades[index] };
   },
 
   async delete(id) {
-    await delay(250);
-    const index = grades.findIndex(g => g.Id === parseInt(id));
-    if (index === -1) {
-      throw new Error("Grade not found");
+    try {
+      const { ApperClient } = window.ApperSDK;
+      const apperClient = new ApperClient({
+        apperProjectId: import.meta.env.VITE_APPER_PROJECT_ID,
+        apperPublicKey: import.meta.env.VITE_APPER_PUBLIC_KEY
+      });
+
+      const params = {
+        RecordIds: [parseInt(id)]
+      };
+
+      const response = await apperClient.deleteRecord('Grades', params);
+      
+      if (!response.success) {
+        console.error(response.message);
+        throw new Error(response.message);
+      }
+
+      if (response.results) {
+        const failedRecords = response.results.filter(result => !result.success);
+        
+        if (failedRecords.length > 0) {
+          console.error(`Failed to delete grades ${failedRecords.length} records:${JSON.stringify(failedRecords)}`);
+          
+          failedRecords.forEach(record => {
+            if (record.message) console.error(record.message);
+          });
+        }
+        
+        return response.results[0]?.success || false;
+      }
+    } catch (error) {
+      if (error?.response?.data?.message) {
+        console.error("Error deleting grade:", error?.response?.data?.message);
+      } else {
+        console.error(error);
+      }
+      throw error;
     }
-    const deletedGrade = grades[index];
-    grades.splice(index, 1);
-    return { ...deletedGrade };
   }
 };
 
+export default gradeService;
 export default gradeService;
