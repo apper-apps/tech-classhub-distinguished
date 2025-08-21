@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { AuthContext } from "@/App";
 import ApperIcon from "@/components/ApperIcon";
 import UserProfile from "@/components/organisms/UserProfile";
-import LogoutButton from "@/components/atoms/LogoutButton";
+import LogoutButton from "@/components/organisms/LogoutButton";
 import SearchBar from "@/components/molecules/SearchBar";
 import Button from "@/components/atoms/Button";
 import Avatar from "@/components/atoms/Avatar";
