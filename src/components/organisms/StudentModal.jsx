@@ -8,13 +8,14 @@ import Input from "@/components/atoms/Input";
 import Select from "@/components/atoms/Select";
 
 const StudentModal = ({ isOpen, onClose, onStudentAdded, student }) => {
-  const [formData, setFormData] = useState({
+const [formData, setFormData] = useState({
     first_name_c: "",
     last_name_c: "",
     email_c: "",
     phone_c: "",
     date_of_birth_c: "",
     grade_level_c: "",
+    marks_c: "",
     status_c: "Active"
   });
   const [loading, setLoading] = useState(false);
@@ -22,7 +23,7 @@ const StudentModal = ({ isOpen, onClose, onStudentAdded, student }) => {
   const isEditing = !!student;
 
   // Populate form when editing
-  useEffect(() => {
+useEffect(() => {
     if (student) {
       setFormData({
         first_name_c: student.firstName || "",
@@ -31,10 +32,11 @@ const StudentModal = ({ isOpen, onClose, onStudentAdded, student }) => {
         phone_c: student.phone || "",
         date_of_birth_c: student.dateOfBirth || "",
         grade_level_c: student.gradeLevel || "",
+        marks_c: student.marks || "",
         status_c: student.status || "Active"
       });
     } else {
-      // Reset form for adding new student
+// Reset form for adding new student
       setFormData({
         first_name_c: "",
         last_name_c: "",
@@ -42,6 +44,7 @@ const StudentModal = ({ isOpen, onClose, onStudentAdded, student }) => {
         phone_c: "",
         date_of_birth_c: "",
         grade_level_c: "",
+        marks_c: "",
         status_c: "Active"
       });
     }
@@ -84,7 +87,7 @@ const StudentModal = ({ isOpen, onClose, onStudentAdded, student }) => {
     }
   };
 
-  const validateForm = () => {
+const validateForm = () => {
     const newErrors = {};
 
 if (!formData.first_name_c.trim()) {
@@ -111,6 +114,10 @@ if (!formData.first_name_c.trim()) {
 
     if (!formData.grade_level_c) {
       newErrors.grade_level_c = "Grade level is required";
+    }
+
+    if (formData.marks_c && (isNaN(formData.marks_c) || formData.marks_c < 0 || formData.marks_c > 100)) {
+      newErrors.marks_c = "Marks must be a number between 0 and 100";
     }
 
     setErrors(newErrors);
@@ -151,13 +158,14 @@ if (isEditing) {
   };
 
 const handleClose = () => {
-    setFormData({
+setFormData({
       first_name_c: "",
       last_name_c: "",
       email_c: "",
       phone_c: "",
       date_of_birth_c: "",
       grade_level_c: "",
+      marks_c: "",
       status_c: "Active"
     });
     setErrors({});
@@ -226,6 +234,17 @@ const handleClose = () => {
               value={formData.date_of_birth_c}
               onChange={(e) => handleInputChange("date_of_birth_c", e.target.value)}
               error={errors.date_of_birth_c}
+            />
+
+            <Input
+              label="Marks"
+              type="number"
+              placeholder="Enter marks (0-100)"
+              value={formData.marks_c}
+              onChange={(e) => handleInputChange("marks_c", e.target.value)}
+              error={errors.marks_c}
+              min="0"
+              max="100"
             />
 
             <div className="grid grid-cols-2 gap-4">

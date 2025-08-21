@@ -16,6 +16,7 @@ const params = {
           { field: { Name: "date_of_birth_c" } },
           { field: { Name: "enrollment_date_c" } },
           { field: { Name: "grade_level_c" } },
+          { field: { Name: "marks_c" } },
           { field: { Name: "status_c" } }
         ]
       };
@@ -28,7 +29,7 @@ const response = await apperClient.fetchRecords('student_c', params);
       }
       
       // Transform database field names to UI property names
-      const transformedData = (response.data || []).map(student => ({
+const transformedData = (response.data || []).map(student => ({
         Id: student.Id,
         firstName: student.first_name_c,
         lastName: student.last_name_c,
@@ -37,6 +38,7 @@ const response = await apperClient.fetchRecords('student_c', params);
         dateOfBirth: student.date_of_birth_c,
         enrollmentDate: student.enrollment_date_c,
         gradeLevel: student.grade_level_c,
+        marks: student.marks_c,
         status: student.status_c
       }));
       
@@ -68,6 +70,7 @@ const params = {
           { field: { Name: "date_of_birth_c" } },
           { field: { Name: "enrollment_date_c" } },
           { field: { Name: "grade_level_c" } },
+          { field: { Name: "marks_c" } },
           { field: { Name: "status_c" } }
         ]
       };
@@ -80,7 +83,7 @@ const response = await apperClient.getRecordById('student_c', parseInt(id), para
       }
       
       // Transform database field names to UI property names
-      const student = response.data;
+const student = response.data;
       if (student) {
         return {
           Id: student.Id,
@@ -91,6 +94,7 @@ const response = await apperClient.getRecordById('student_c', parseInt(id), para
           dateOfBirth: student.date_of_birth_c,
           enrollmentDate: student.enrollment_date_c,
           gradeLevel: student.grade_level_c,
+          marks: student.marks_c,
           status: student.status_c
         };
       }
@@ -140,7 +144,7 @@ const params = {
         }
         
 if (successfulRecords.length > 0) {
-          const student = successfulRecords[0].data;
+const student = successfulRecords[0].data;
           return {
             Id: student.Id,
             firstName: student.first_name_c,
@@ -150,6 +154,7 @@ if (successfulRecords.length > 0) {
             dateOfBirth: student.date_of_birth_c,
             enrollmentDate: student.enrollment_date_c,
             gradeLevel: student.grade_level_c,
+            marks: student.marks_c,
             status: student.status_c
           };
         }
@@ -202,7 +207,7 @@ const params = {
         }
         
 if (successfulRecords.length > 0) {
-          const student = successfulRecords[0].data;
+const student = successfulRecords[0].data;
           return {
             Id: student.Id,
             firstName: student.first_name_c,
@@ -212,6 +217,7 @@ if (successfulRecords.length > 0) {
             dateOfBirth: student.date_of_birth_c,
             enrollmentDate: student.enrollment_date_c,
             gradeLevel: student.grade_level_c,
+            marks: student.marks_c,
             status: student.status_c
           };
         }
