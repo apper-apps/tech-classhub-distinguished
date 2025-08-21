@@ -16,6 +16,7 @@ const params = {
           { field: { Name: "date_of_birth_c" } },
           { field: { Name: "enrollment_date_c" } },
           { field: { Name: "grade_level_c" } },
+          { field: { Name: "academic_year_c" } },
           { field: { Name: "marks_c" } },
           { field: { Name: "status_c" } }
         ]
@@ -38,6 +39,7 @@ const transformedData = (response.data || []).map(student => ({
         dateOfBirth: student.date_of_birth_c,
         enrollmentDate: student.enrollment_date_c,
         gradeLevel: student.grade_level_c,
+        academicYear: student.academic_year_c,
         marks: student.marks_c,
         status: student.status_c
       }));
@@ -70,6 +72,7 @@ const params = {
           { field: { Name: "date_of_birth_c" } },
           { field: { Name: "enrollment_date_c" } },
           { field: { Name: "grade_level_c" } },
+          { field: { Name: "academic_year_c" } },
           { field: { Name: "marks_c" } },
           { field: { Name: "status_c" } }
         ]
@@ -94,6 +97,7 @@ const student = response.data;
           dateOfBirth: student.date_of_birth_c,
           enrollmentDate: student.enrollment_date_c,
           gradeLevel: student.grade_level_c,
+          academicYear: student.academic_year_c,
           marks: student.marks_c,
           status: student.status_c
         };
@@ -154,6 +158,7 @@ const student = successfulRecords[0].data;
             dateOfBirth: student.date_of_birth_c,
             enrollmentDate: student.enrollment_date_c,
             gradeLevel: student.grade_level_c,
+            academicYear: student.academic_year_c,
             marks: student.marks_c,
             status: student.status_c
           };
@@ -217,6 +222,7 @@ const student = successfulRecords[0].data;
             dateOfBirth: student.date_of_birth_c,
             enrollmentDate: student.enrollment_date_c,
             gradeLevel: student.grade_level_c,
+            academicYear: student.academic_year_c,
             marks: student.marks_c,
             status: student.status_c
           };

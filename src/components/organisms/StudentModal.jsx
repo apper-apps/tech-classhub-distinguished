@@ -15,6 +15,7 @@ const [formData, setFormData] = useState({
     phone_c: "",
     date_of_birth_c: "",
     grade_level_c: "",
+    academic_year_c: "",
     marks_c: "",
     status_c: "Active"
   });
@@ -32,6 +33,7 @@ useEffect(() => {
         phone_c: student.phone || "",
         date_of_birth_c: student.dateOfBirth || "",
         grade_level_c: student.gradeLevel || "",
+        academic_year_c: student.academicYear || "",
         marks_c: student.marks || "",
         status_c: student.status || "Active"
       });
@@ -44,13 +46,14 @@ useEffect(() => {
         phone_c: "",
         date_of_birth_c: "",
         grade_level_c: "",
+        academic_year_c: "",
         marks_c: "",
         status_c: "Active"
       });
     }
     setErrors({});
   }, [student]);
-  const gradeOptions = [
+const gradeOptions = [
     { value: "K", label: "Kindergarten" },
     { value: "1", label: "1st Grade" },
     { value: "2", label: "2nd Grade" },
@@ -64,6 +67,14 @@ useEffect(() => {
     { value: "10", label: "10th Grade" },
     { value: "11", label: "11th Grade" },
     { value: "12", label: "12th Grade" }
+  ];
+
+  const academicYearOptions = [
+    { value: "Freshman", label: "Freshman" },
+    { value: "Sophomore", label: "Sophomore" },
+    { value: "Junior", label: "Junior" },
+    { value: "Senior", label: "Senior" },
+    { value: "Graduate", label: "Graduate" }
   ];
 
   const statusOptions = [
@@ -114,6 +125,10 @@ if (!formData.first_name_c.trim()) {
 
     if (!formData.grade_level_c) {
       newErrors.grade_level_c = "Grade level is required";
+    }
+
+    if (!formData.academic_year_c) {
+      newErrors.academic_year_c = "Academic year is required";
     }
 
     if (formData.marks_c && (isNaN(formData.marks_c) || formData.marks_c < 0 || formData.marks_c > 100)) {
@@ -171,6 +186,7 @@ setFormData({
       phone_c: "",
       date_of_birth_c: "",
       grade_level_c: "",
+      academic_year_c: "",
       marks_c: "",
       status_c: "Active"
     });
@@ -253,7 +269,7 @@ setFormData({
               max="100"
             />
 
-            <div className="grid grid-cols-2 gap-4">
+<div className="grid grid-cols-2 gap-4">
 <Select
                 label="Grade Level"
                 value={formData.grade_level_c}
@@ -263,12 +279,21 @@ setFormData({
                 placeholder="Select grade"
               />
 <Select
-                label="Status"
-                value={formData.status_c}
-                onChange={(e) => handleInputChange("status_c", e.target.value)}
-                options={statusOptions}
+                label="Academic Year"
+                value={formData.academic_year_c}
+                onChange={(e) => handleInputChange("academic_year_c", e.target.value)}
+                options={academicYearOptions}
+                error={errors.academic_year_c}
+                placeholder="Select academic year"
               />
             </div>
+
+            <Select
+              label="Status"
+              value={formData.status_c}
+              onChange={(e) => handleInputChange("status_c", e.target.value)}
+              options={statusOptions}
+            />
 
             <div className="flex justify-end space-x-3 pt-4">
               <Button

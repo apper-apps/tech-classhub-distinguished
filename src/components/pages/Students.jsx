@@ -36,7 +36,7 @@ const [isModalOpen, setIsModalOpen] = useState(false);
     loadStudents();
   }, []);
 
-  useEffect(() => {
+useEffect(() => {
     if (!searchQuery) {
       setFilteredStudents(students);
 } else {
@@ -45,7 +45,8 @@ const [isModalOpen, setIsModalOpen] = useState(false);
         student.lastName?.toLowerCase().includes(searchQuery.toLowerCase()) ||
         student.email?.toLowerCase().includes(searchQuery.toLowerCase()) ||
         student.phone?.includes(searchQuery) ||
-        student.gradeLevel?.toLowerCase().includes(searchQuery.toLowerCase())
+        student.gradeLevel?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        student.academicYear?.toLowerCase().includes(searchQuery.toLowerCase())
       );
       setFilteredStudents(filtered);
     }
