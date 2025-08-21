@@ -1,14 +1,14 @@
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
+import studentService from "@/services/api/studentService";
 import ApperIcon from "@/components/ApperIcon";
 import Button from "@/components/atoms/Button";
 import Card from "@/components/atoms/Card";
 import Input from "@/components/atoms/Input";
 import Select from "@/components/atoms/Select";
-import studentService from "@/services/api/studentService";
 
-const StudentModal = ({ isOpen, onClose, onStudentAdded }) => {
-const [formData, setFormData] = useState({
+const StudentModal = ({ isOpen, onClose, onStudentAdded, student }) => {
+  const [formData, setFormData] = useState({
     first_name_c: "",
     last_name_c: "",
     email_c: "",
@@ -19,7 +19,34 @@ const [formData, setFormData] = useState({
   });
   const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState({});
+  const isEditing = !!student;
 
+  // Populate form when editing
+  useEffect(() => {
+    if (student) {
+      setFormData({
+        first_name_c: student.firstName || "",
+        last_name_c: student.lastName || "",
+        email_c: student.email || "",
+        phone_c: student.phone || "",
+        date_of_birth_c: student.dateOfBirth || "",
+        grade_level_c: student.gradeLevel || "",
+        status_c: student.status || "Active"
+      });
+    } else {
+      // Reset form for adding new student
+      setFormData({
+        first_name_c: "",
+        last_name_c: "",
+        email_c: "",
+        phone_c: "",
+        date_of_birth_c: "",
+        grade_level_c: "",
+        status_c: "Active"
+      });
+    }
+    setErrors({});
+  }, [student]);
   const gradeOptions = [
     { value: "K", label: "Kindergarten" },
     { value: "1", label: "1st Grade" },
@@ -99,25 +126,32 @@ if (!formData.first_name_c.trim()) {
 
     setLoading(true);
     try {
-const studentData = {
-        ...formData,
-        enrollment_date_c: new Date().toISOString().split("T")[0]
-      };
-
-      await studentService.create(studentData);
-      toast.success("Student added successfully!");
+if (isEditing) {
+        // Update existing student
+        await studentService.update(student.Id, formData);
+        toast.success("Student updated successfully!");
+      } else {
+        // Create new student
+        const studentData = {
+          ...formData,
+          enrollment_date_c: new Date().toISOString().split("T")[0]
+        };
+        await studentService.create(studentData);
+        toast.success("Student added successfully!");
+      }
+      
       onStudentAdded?.();
       handleClose();
     } catch (error) {
-      console.error("Error adding student:", error);
-      toast.error("Failed to add student");
+      console.error(isEditing ? "Error updating student:" : "Error adding student:", error);
+      toast.error(isEditing ? "Failed to update student" : "Failed to add student");
     } finally {
       setLoading(false);
     }
   };
 
-  const handleClose = () => {
-setFormData({
+const handleClose = () => {
+    setFormData({
       first_name_c: "",
       last_name_c: "",
       email_c: "",
@@ -139,8 +173,8 @@ setFormData({
 
         <div className="inline-block w-full max-w-md p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-lg">
           <div className="flex items-center justify-between mb-6">
-            <h3 className="text-lg font-semibold text-gray-900">
-              Add New Student
+<h3 className="text-lg font-semibold text-gray-900">
+              {isEditing ? 'Edit Student' : 'Add New Student'}
             </h3>
             <Button
               variant="ghost"
@@ -224,8 +258,8 @@ setFormData({
                 variant="accent"
                 loading={loading}
                 icon="Plus"
-              >
-                Add Student
+>
+                {isEditing ? 'Update Student' : 'Add Student'}
               </Button>
             </div>
           </form>

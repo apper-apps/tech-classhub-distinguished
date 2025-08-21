@@ -14,8 +14,8 @@ const Students = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
+const [isModalOpen, setIsModalOpen] = useState(false);
+  const [editingStudent, setEditingStudent] = useState(null);
   const loadStudents = async () => {
     setLoading(true);
     setError("");
@@ -95,9 +95,13 @@ const Students = () => {
           onAction={() => setIsModalOpen(true)}
         />
         <StudentModal
-          isOpen={isModalOpen}
-          onClose={() => setIsModalOpen(false)}
+isOpen={isModalOpen}
+          onClose={() => {
+            setIsModalOpen(false);
+            setEditingStudent(null);
+          }}
           onStudentAdded={loadStudents}
+          student={editingStudent}
         />
       </div>
     );
@@ -146,17 +150,25 @@ const Students = () => {
         />
       ) : (
         <StudentTable
-          students={filteredStudents}
+students={filteredStudents}
           onStudentUpdated={loadStudents}
           onStudentDeleted={loadStudents}
+          onStudentEdit={(student) => {
+            setEditingStudent(student);
+            setIsModalOpen(true);
+          }}
         />
       )}
 
       {/* Add Student Modal */}
-      <StudentModal
+<StudentModal
         isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
+        onClose={() => {
+          setIsModalOpen(false);
+          setEditingStudent(null);
+        }}
         onStudentAdded={loadStudents}
+        student={editingStudent}
       />
     </div>
   );

@@ -7,7 +7,7 @@ import Avatar from "@/components/atoms/Avatar";
 import Card from "@/components/atoms/Card";
 import studentService from "@/services/api/studentService";
 
-const StudentTable = ({ students = [], onStudentUpdated, onStudentDeleted }) => {
+const StudentTable = ({ students = [], onStudentUpdated, onStudentDeleted, onStudentEdit }) => {
   const [loading, setLoading] = useState(false);
 
   const handleStatusChange = async (studentId, newStatus) => {
@@ -146,9 +146,9 @@ const StudentTable = ({ students = [], onStudentUpdated, onStudentDeleted }) => 
                     <Button
                       variant="ghost"
                       size="sm"
-                      icon="Edit"
+icon="Edit"
                       onClick={() => {
-                        toast.info("Edit functionality would open student form");
+                        onStudentEdit?.(student);
                       }}
                       disabled={loading}
                     />
