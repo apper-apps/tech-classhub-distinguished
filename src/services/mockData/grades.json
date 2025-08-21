@@ -1,0 +1,122 @@
+[
+  {
+    "Id": 1,
+    "studentId": 1,
+    "assignmentId": 1,
+    "score": 23,
+    "submittedDate": "2024-01-15",
+    "comments": "Excellent work"
+  },
+  {
+    "Id": 2,
+    "studentId": 2,
+    "assignmentId": 1,
+    "score": 22,
+    "submittedDate": "2024-01-15",
+    "comments": "Good effort"
+  },
+  {
+    "Id": 3,
+    "studentId": 3,
+    "assignmentId": 1,
+    "score": 20,
+    "submittedDate": "2024-01-15",
+    "comments": "Needs improvement on problem 3"
+  },
+  {
+    "Id": 4,
+    "studentId": 4,
+    "assignmentId": 1,
+    "score": 25,
+    "submittedDate": "2024-01-15",
+    "comments": "Perfect score!"
+  },
+  {
+    "Id": 5,
+    "studentId": 5,
+    "assignmentId": 1,
+    "score": 21,
+    "submittedDate": "2024-01-15",
+    "comments": "Good work overall"
+  },
+  {
+    "Id": 6,
+    "studentId": 1,
+    "assignmentId": 2,
+    "score": 18,
+    "submittedDate": "2024-01-18",
+    "comments": "Well done"
+  },
+  {
+    "Id": 7,
+    "studentId": 2,
+    "assignmentId": 2,
+    "score": 19,
+    "submittedDate": "2024-01-18",
+    "comments": "Nice improvement"
+  },
+  {
+    "Id": 8,
+    "studentId": 3,
+    "assignmentId": 2,
+    "score": 17,
+    "submittedDate": "2024-01-18",
+    "comments": "Good effort"
+  },
+  {
+    "Id": 9,
+    "studentId": 4,
+    "assignmentId": 2,
+    "score": 20,
+    "submittedDate": "2024-01-18",
+    "comments": "Excellent work"
+  },
+  {
+    "Id": 10,
+    "studentId": 5,
+    "assignmentId": 2,
+    "score": 16,
+    "submittedDate": "2024-01-18",
+    "comments": "Room for improvement"
+  },
+  {
+    "Id": 11,
+    "studentId": 1,
+    "assignmentId": 3,
+    "score": 92,
+    "submittedDate": "2024-01-22",
+    "comments": "Great performance on the exam"
+  },
+  {
+    "Id": 12,
+    "studentId": 2,
+    "assignmentId": 3,
+    "score": 88,
+    "submittedDate": "2024-01-22",
+    "comments": "Solid work"
+  },
+  {
+    "Id": 13,
+    "studentId": 3,
+    "assignmentId": 3,
+    "score": 85,
+    "submittedDate": "2024-01-22",
+    "comments": "Good progress"
+  },
+  {
+    "Id": 14,
+    "studentId": 4,
+    "assignmentId": 3,
+    "score": 95,
+    "submittedDate": "2024-01-22",
+    "comments": "Outstanding performance"
+  },
+  {
+    "Id": 15,
+    "studentId": 5,
+    "assignmentId": 3,
+    "score": 82,
+    "submittedDate": "2024-01-22",
+    "comments": "Good work, study harder for next time"
+  }
+]

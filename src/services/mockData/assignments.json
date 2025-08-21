@@ -1,0 +1,50 @@
+[
+  {
+    "Id": 1,
+    "title": "Algebra Chapter 3 Quiz",
+    "category": "Quiz",
+    "totalPoints": 25,
+    "dueDate": "2024-01-15",
+    "description": "Quiz covering linear equations and graphing"
+  },
+  {
+    "Id": 2,
+    "title": "Geometry Problem Set #1",
+    "category": "Homework",
+    "totalPoints": 20,
+    "dueDate": "2024-01-18",
+    "description": "Practice problems on angles and triangles"
+  },
+  {
+    "Id": 3,
+    "title": "Mid-Term Exam",
+    "category": "Test",
+    "totalPoints": 100,
+    "dueDate": "2024-01-22",
+    "description": "Comprehensive exam covering chapters 1-4"
+  },
+  {
+    "Id": 4,
+    "title": "Statistics Project",
+    "category": "Project",
+    "totalPoints": 50,
+    "dueDate": "2024-01-25",
+    "description": "Data collection and analysis project"
+  },
+  {
+    "Id": 5,
+    "title": "Daily Participation Week 3",
+    "category": "Participation",
+    "totalPoints": 15,
+    "dueDate": "2024-01-26",
+    "description": "Class participation and engagement"
+  },
+  {
+    "Id": 6,
+    "title": "Trigonometry Homework",
+    "category": "Homework",
+    "totalPoints": 30,
+    "dueDate": "2024-01-29",
+    "description": "Practice with sine, cosine, and tangent"
+  }
+]
