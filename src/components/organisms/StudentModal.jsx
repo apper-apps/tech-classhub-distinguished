@@ -148,12 +148,12 @@ const handleSubmit = async (e) => {
 
     setLoading(true);
     try {
-      // Convert marks to integer to match database field type
+      // Convert marks to integer to match database field type and populate Name field
       const processedData = {
         ...formData,
-        marks_c: formData.marks_c ? parseInt(formData.marks_c, 10) : null
+        marks_c: formData.marks_c ? parseInt(formData.marks_c, 10) : null,
+        Name: `${formData.first_name_c || ''} ${formData.last_name_c || ''}`.trim()
       };
-
       if (isEditing) {
         // Update existing student
         await studentService.update(student.Id, processedData);

@@ -8,7 +8,8 @@ const studentService = {
       });
 
 const params = {
-        fields: [
+fields: [
+          { field: { Name: "Name" } },
           { field: { Name: "first_name_c" } },
           { field: { Name: "last_name_c" } },
           { field: { Name: "email_c" } },
@@ -32,6 +33,7 @@ const response = await apperClient.fetchRecords('student_c', params);
       // Transform database field names to UI property names
 const transformedData = (response.data || []).map(student => ({
         Id: student.Id,
+        name: student.Name || `${student.first_name_c || ''} ${student.last_name_c || ''}`.trim(),
         firstName: student.first_name_c,
         lastName: student.last_name_c,
         email: student.email_c,
@@ -64,7 +66,8 @@ const transformedData = (response.data || []).map(student => ({
       });
 
 const params = {
-        fields: [
+fields: [
+          { field: { Name: "Name" } },
           { field: { Name: "first_name_c" } },
           { field: { Name: "last_name_c" } },
           { field: { Name: "email_c" } },
@@ -87,9 +90,10 @@ const response = await apperClient.getRecordById('student_c', parseInt(id), para
       
       // Transform database field names to UI property names
 const student = response.data;
-      if (student) {
+if (student) {
         return {
           Id: student.Id,
+          name: student.Name || `${student.first_name_c || ''} ${student.last_name_c || ''}`.trim(),
           firstName: student.first_name_c,
           lastName: student.last_name_c,
           email: student.email_c,
@@ -151,6 +155,7 @@ if (successfulRecords.length > 0) {
 const student = successfulRecords[0].data;
           return {
             Id: student.Id,
+            name: student.Name || `${student.first_name_c || ''} ${student.last_name_c || ''}`.trim(),
             firstName: student.first_name_c,
             lastName: student.last_name_c,
             email: student.email_c,
@@ -215,6 +220,7 @@ if (successfulRecords.length > 0) {
 const student = successfulRecords[0].data;
           return {
             Id: student.Id,
+            name: student.Name || `${student.first_name_c || ''} ${student.last_name_c || ''}`.trim(),
             firstName: student.first_name_c,
             lastName: student.last_name_c,
             email: student.email_c,
