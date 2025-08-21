@@ -212,6 +212,4 @@ const studentService = {
     }
   }
 };
-
-export default studentService;
 export default studentService;

@@ -206,6 +206,4 @@ const gradeService = {
     }
   }
 };
-
-export default gradeService;
 export default gradeService;

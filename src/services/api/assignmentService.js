@@ -206,6 +206,4 @@ const assignmentService = {
     }
   }
 };
-
-export default assignmentService;
 export default assignmentService;

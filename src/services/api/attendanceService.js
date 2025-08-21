@@ -204,6 +204,4 @@ const attendanceService = {
     }
   }
 };
-
-export default attendanceService;
 export default attendanceService;
