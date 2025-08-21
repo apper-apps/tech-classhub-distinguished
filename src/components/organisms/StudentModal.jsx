@@ -8,14 +8,14 @@ import Select from "@/components/atoms/Select";
 import studentService from "@/services/api/studentService";
 
 const StudentModal = ({ isOpen, onClose, onStudentAdded }) => {
-  const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-    phone: "",
-    dateOfBirth: "",
-    gradeLevel: "",
-    status: "Active"
+const [formData, setFormData] = useState({
+    first_name_c: "",
+    last_name_c: "",
+    email_c: "",
+    phone_c: "",
+    date_of_birth_c: "",
+    grade_level_c: "",
+    status_c: "Active"
   });
   const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState({});
@@ -99,9 +99,9 @@ const StudentModal = ({ isOpen, onClose, onStudentAdded }) => {
 
     setLoading(true);
     try {
-      const studentData = {
+const studentData = {
         ...formData,
-        enrollmentDate: new Date().toISOString().split("T")[0]
+        enrollment_date_c: new Date().toISOString().split("T")[0]
       };
 
       await studentService.create(studentData);
