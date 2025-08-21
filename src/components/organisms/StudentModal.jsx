@@ -60,30 +60,30 @@ const [formData, setFormData] = useState({
   const validateForm = () => {
     const newErrors = {};
 
-    if (!formData.firstName.trim()) {
-      newErrors.firstName = "First name is required";
+if (!formData.first_name_c.trim()) {
+      newErrors.first_name_c = "First name is required";
     }
 
-    if (!formData.lastName.trim()) {
-      newErrors.lastName = "Last name is required";
+    if (!formData.last_name_c.trim()) {
+      newErrors.last_name_c = "Last name is required";
     }
 
-    if (!formData.email.trim()) {
-      newErrors.email = "Email is required";
-    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-      newErrors.email = "Email is invalid";
+    if (!formData.email_c.trim()) {
+      newErrors.email_c = "Email is required";
+    } else if (!/\S+@\S+\.\S+/.test(formData.email_c)) {
+      newErrors.email_c = "Email is invalid";
     }
 
-    if (!formData.phone.trim()) {
-      newErrors.phone = "Phone number is required";
+    if (!formData.phone_c.trim()) {
+      newErrors.phone_c = "Phone number is required";
     }
 
-    if (!formData.dateOfBirth) {
-      newErrors.dateOfBirth = "Date of birth is required";
+    if (!formData.date_of_birth_c) {
+      newErrors.date_of_birth_c = "Date of birth is required";
     }
 
-    if (!formData.gradeLevel) {
-      newErrors.gradeLevel = "Grade level is required";
+    if (!formData.grade_level_c) {
+      newErrors.grade_level_c = "Grade level is required";
     }
 
     setErrors(newErrors);
@@ -117,14 +117,14 @@ const studentData = {
   };
 
   const handleClose = () => {
-    setFormData({
-      firstName: "",
-      lastName: "",
-      email: "",
-      phone: "",
-      dateOfBirth: "",
-      gradeLevel: "",
-      status: "Active"
+setFormData({
+      first_name_c: "",
+      last_name_c: "",
+      email_c: "",
+      phone_c: "",
+      date_of_birth_c: "",
+      grade_level_c: "",
+      status_c: "Active"
     });
     setErrors({});
     onClose();
@@ -152,61 +152,61 @@ const studentData = {
 
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="grid grid-cols-2 gap-4">
-              <Input
+<Input
                 label="First Name"
-                value={formData.firstName}
-                onChange={(e) => handleInputChange("firstName", e.target.value)}
-                error={errors.firstName}
+                value={formData.first_name_c}
+                onChange={(e) => handleInputChange("first_name_c", e.target.value)}
+                error={errors.first_name_c}
                 placeholder="Enter first name"
               />
-              <Input
+<Input
                 label="Last Name"
-                value={formData.lastName}
-                onChange={(e) => handleInputChange("lastName", e.target.value)}
-                error={errors.lastName}
+                value={formData.last_name_c}
+                onChange={(e) => handleInputChange("last_name_c", e.target.value)}
+                error={errors.last_name_c}
                 placeholder="Enter last name"
               />
             </div>
 
-            <Input
+<Input
               label="Email"
               type="email"
-              value={formData.email}
-              onChange={(e) => handleInputChange("email", e.target.value)}
-              error={errors.email}
+              value={formData.email_c}
+              onChange={(e) => handleInputChange("email_c", e.target.value)}
+              error={errors.email_c}
               placeholder="Enter email address"
             />
 
-            <Input
+<Input
               label="Phone"
               type="tel"
-              value={formData.phone}
-              onChange={(e) => handleInputChange("phone", e.target.value)}
-              error={errors.phone}
+              value={formData.phone_c}
+              onChange={(e) => handleInputChange("phone_c", e.target.value)}
+              error={errors.phone_c}
               placeholder="Enter phone number"
             />
 
-            <Input
+<Input
               label="Date of Birth"
               type="date"
-              value={formData.dateOfBirth}
-              onChange={(e) => handleInputChange("dateOfBirth", e.target.value)}
-              error={errors.dateOfBirth}
+              value={formData.date_of_birth_c}
+              onChange={(e) => handleInputChange("date_of_birth_c", e.target.value)}
+              error={errors.date_of_birth_c}
             />
 
             <div className="grid grid-cols-2 gap-4">
-              <Select
+<Select
                 label="Grade Level"
-                value={formData.gradeLevel}
-                onChange={(e) => handleInputChange("gradeLevel", e.target.value)}
+                value={formData.grade_level_c}
+                onChange={(e) => handleInputChange("grade_level_c", e.target.value)}
                 options={gradeOptions}
-                error={errors.gradeLevel}
+                error={errors.grade_level_c}
                 placeholder="Select grade"
               />
-              <Select
+<Select
                 label="Status"
-                value={formData.status}
-                onChange={(e) => handleInputChange("status", e.target.value)}
+                value={formData.status_c}
+                onChange={(e) => handleInputChange("status_c", e.target.value)}
                 options={statusOptions}
               />
             </div>
