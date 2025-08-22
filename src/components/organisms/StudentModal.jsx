@@ -26,12 +26,24 @@ const [formData, setFormData] = useState({
   // Populate form when editing
 useEffect(() => {
     if (student) {
+      // Format date for HTML date input (YYYY-MM-DD format required)
+      const formatDateForInput = (dateValue) => {
+        if (!dateValue) return "";
+        // If it's already in YYYY-MM-DD format, return as is
+        if (typeof dateValue === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(dateValue)) {
+          return dateValue;
+        }
+        // Convert to Date and format as YYYY-MM-DD
+        const date = new Date(dateValue);
+        return date.toISOString().split('T')[0];
+      };
+
       setFormData({
         first_name_c: student.first_name_c || "",
         last_name_c: student.last_name_c || "",
         email_c: student.email_c || "",
         phone_c: student.phone_c || "",
-        date_of_birth_c: student.date_of_birth_c || "",
+        date_of_birth_c: formatDateForInput(student.date_of_birth_c),
         grade_level_c: student.grade_level_c || "",
         academic_year_c: student.academic_year_c || "",
         marks_c: student.marks_c || "",
