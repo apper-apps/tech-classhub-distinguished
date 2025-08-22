@@ -26,8 +26,7 @@ const Attendance = () => {
         studentService.getAll(),
         attendanceService.getAll()
       ]);
-      
-      setStudents(studentsData.filter(s => s.status === "Active"));
+setStudents(studentsData.filter(s => s.status_c === "Active"));
       setAttendance(attendanceData);
     } catch (err) {
       console.error("Error loading attendance data:", err);

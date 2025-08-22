@@ -161,16 +161,16 @@ const AttendanceGrid = ({ students = [], attendance = [], selectedDate, onAttend
               {students.map((student) => (
                 <div key={student.Id} className="grid grid-cols-[200px_1fr] gap-4 items-center p-3 bg-white rounded-lg border border-gray-200 hover:bg-gray-50 transition-colors duration-200">
                   <div className="flex items-center space-x-3">
-                    <Avatar 
-                      initials={getInitials(student.firstName, student.lastName)}
+<Avatar 
+                      initials={getInitials(student.first_name_c, student.last_name_c)}
                       size="sm"
                     />
                     <div>
                       <div className="font-medium text-gray-900 text-sm">
-                        {student.firstName} {student.lastName}
+                        {student.first_name_c} {student.last_name_c}
                       </div>
                       <div className="text-xs text-secondary-500">
-                        Grade {student.gradeLevel}
+                        Grade {student.grade_level_c}
                       </div>
                     </div>
                   </div>
