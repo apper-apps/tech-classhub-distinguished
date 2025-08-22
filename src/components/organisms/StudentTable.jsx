@@ -96,15 +96,15 @@ const StudentTable = ({ students = [], onStudentUpdated, onStudentDeleted, onStu
                 key={student.Id} 
                 className="hover:bg-gradient-to-r hover:from-gray-50 hover:to-transparent transition-all duration-200"
               >
-                <td className="py-4 px-4">
+<td className="py-4 px-4">
                   <div className="flex items-center space-x-3">
                     <Avatar 
-                      initials={getInitials(student.firstName, student.lastName)}
+                      initials={getInitials(student.first_name_c, student.last_name_c)}
                       size="md"
                     />
                     <div>
                       <div className="font-medium text-gray-900">
-                        {student.firstName} {student.lastName}
+                        {student.first_name_c} {student.last_name_c}
                       </div>
                       <div className="text-sm text-secondary-500">
                         ID: {student.Id}
@@ -114,24 +114,24 @@ const StudentTable = ({ students = [], onStudentUpdated, onStudentDeleted, onStu
                 </td>
 <td className="py-4 px-4">
                   <div className="text-sm">
-                    <div className="text-gray-900">{student.email || 'No email'}</div>
-                    <div className="text-secondary-500">{student.phone || 'No phone'}</div>
+                    <div className="text-gray-900">{student.email_c || 'No email'}</div>
+                    <div className="text-secondary-500">{student.phone_c || 'No phone'}</div>
                   </div>
                 </td>
                 <td className="py-4 px-4">
                   <Badge variant="grade">
-                    {student.gradeLevel}
+                    {student.grade_level_c}
                   </Badge>
                 </td>
                 <td className="py-4 px-4 text-sm text-gray-900">
-                  {calculateAge(student.dateOfBirth)} years
+                  {calculateAge(student.date_of_birth_c)} years
                 </td>
                 <td className="py-4 px-4 text-sm text-gray-900">
-                  {formatDate(student.enrollmentDate)}
+                  {formatDate(student.enrollment_date_c)}
                 </td>
                 <td className="py-4 px-4">
-                  <select
-                    value={student.status}
+<select
+                    value={student.status_c}
                     onChange={(e) => handleStatusChange(student.Id, e.target.value)}
                     disabled={loading}
                     className="text-sm border-0 bg-transparent focus:ring-0 p-0"

@@ -27,15 +27,15 @@ const [formData, setFormData] = useState({
 useEffect(() => {
     if (student) {
       setFormData({
-        first_name_c: student.firstName || "",
-        last_name_c: student.lastName || "",
-        email_c: student.email || "",
-        phone_c: student.phone || "",
-        date_of_birth_c: student.dateOfBirth || "",
-        grade_level_c: student.gradeLevel || "",
-        academic_year_c: student.academicYear || "",
-        marks_c: student.marks || "",
-        status_c: student.status || "Active"
+        first_name_c: student.first_name_c || "",
+        last_name_c: student.last_name_c || "",
+        email_c: student.email_c || "",
+        phone_c: student.phone_c || "",
+        date_of_birth_c: student.date_of_birth_c || "",
+        grade_level_c: student.grade_level_c || "",
+        academic_year_c: student.academic_year_c || "",
+        marks_c: student.marks_c || "",
+        status_c: student.status_c || "Active"
       });
     } else {
 // Reset form for adding new student

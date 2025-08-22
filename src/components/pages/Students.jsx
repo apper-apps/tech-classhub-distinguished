@@ -41,12 +41,12 @@ useEffect(() => {
       setFilteredStudents(students);
 } else {
       const filtered = students.filter(student => 
-        student.firstName?.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        student.lastName?.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        student.email?.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        student.phone?.includes(searchQuery) ||
-        student.gradeLevel?.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        student.academicYear?.toLowerCase().includes(searchQuery.toLowerCase())
+        student.first_name_c?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        student.last_name_c?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        student.email_c?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        student.phone_c?.includes(searchQuery) ||
+        student.grade_level_c?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        student.academic_year_c?.toLowerCase().includes(searchQuery.toLowerCase())
       );
       setFilteredStudents(filtered);
     }
