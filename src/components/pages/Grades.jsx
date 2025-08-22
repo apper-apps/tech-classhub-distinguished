@@ -4,6 +4,7 @@ import Card from "@/components/atoms/Card";
 import Avatar from "@/components/atoms/Avatar";
 import GradePill from "@/components/molecules/GradePill";
 import GradeEntryForm from "@/components/organisms/GradeEntryForm";
+import GradeCreateForm from "@/components/organisms/GradeCreateForm";
 import Loading from "@/components/ui/Loading";
 import Error from "@/components/ui/Error";
 import Empty from "@/components/ui/Empty";
@@ -20,9 +21,9 @@ const Grades = () => {
   const [grades, setGrades] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
-  const [isFormOpen, setIsFormOpen] = useState(false);
+const [isFormOpen, setIsFormOpen] = useState(false);
+  const [isGradeFormOpen, setIsGradeFormOpen] = useState(false);
   const [gradeInputs, setGradeInputs] = useState({});
-
   const loadGradesData = async () => {
     setLoading(true);
     setError("");
@@ -205,20 +206,29 @@ const Grades = () => {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+<div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
           <h1 className="text-2xl font-bold text-gray-900">Grades</h1>
           <p className="text-secondary-600">
             Manage assignments and track student progress
           </p>
         </div>
-        <Button
-          variant="accent"
-          icon="Plus"
-          onClick={() => setIsFormOpen(true)}
-        >
-          Add Assignment
-        </Button>
+        <div className="flex flex-col sm:flex-row gap-2">
+          <Button
+            variant="outline"
+            icon="Plus"
+            onClick={() => setIsGradeFormOpen(true)}
+          >
+            Create New Grade
+          </Button>
+          <Button
+            variant="accent"
+            icon="Plus"
+            onClick={() => setIsFormOpen(true)}
+          >
+            Add Assignment
+          </Button>
+        </div>
       </div>
 
       {/* Assignments Summary */}
@@ -393,11 +403,18 @@ const Grades = () => {
         </div>
       </Card>
 
-      {/* Grade Entry Form */}
+{/* Grade Entry Form */}
       <GradeEntryForm
         isOpen={isFormOpen}
         onClose={() => setIsFormOpen(false)}
         onAssignmentAdded={loadGradesData}
+      />
+
+      {/* Grade Create Form */}
+      <GradeCreateForm
+        isOpen={isGradeFormOpen}
+        onClose={() => setIsGradeFormOpen(false)}
+        onGradeAdded={loadGradesData}
       />
     </div>
   );
