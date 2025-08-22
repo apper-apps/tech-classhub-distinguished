@@ -63,8 +63,8 @@ const Dashboard = () => {
     : 0;
 
   // Get recent activity (last 5 students)
-  const recentStudents = students
-    .sort((a, b) => new Date(b.enrollmentDate) - new Date(a.enrollmentDate))
+const recentStudents = students
+    .sort((a, b) => new Date(b.enrollment_date_c) - new Date(a.enrollment_date_c))
     .slice(0, 5);
 
   const getInitials = (firstName, lastName) => {
@@ -184,24 +184,24 @@ const Dashboard = () => {
               </Button>
             </div>
             <div className="space-y-3">
-              {recentStudents.map((student) => (
+{recentStudents.map((student) => (
                 <div key={student.Id} className="flex items-center justify-between p-3 bg-gradient-to-r from-gray-50 to-transparent rounded-lg">
                   <div className="flex items-center space-x-3">
                     <Avatar
-                      initials={getInitials(student.firstName, student.lastName)}
+                      initials={getInitials(student.first_name_c, student.last_name_c)}
                       size="sm"
                     />
                     <div>
                       <div className="font-medium text-gray-900 text-sm">
-                        {student.firstName} {student.lastName}
+                        {student.first_name_c} {student.last_name_c}
                       </div>
                       <div className="text-xs text-secondary-500">
-                        Enrolled: {formatDate(student.enrollmentDate)}
+                        Enrolled: {formatDate(student.enrollment_date_c)}
                       </div>
                     </div>
                   </div>
                   <Badge variant="grade" size="sm">
-                    Grade {student.gradeLevel}
+                    Grade {student.grade_level_c}
                   </Badge>
                 </div>
               ))}
