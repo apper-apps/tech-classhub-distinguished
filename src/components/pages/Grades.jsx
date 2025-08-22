@@ -35,7 +35,7 @@ const [isFormOpen, setIsFormOpen] = useState(false);
         gradeService.getAll()
       ]);
       
-      setStudents(studentsData.filter(s => s.status === "Active"));
+setStudents(studentsData.filter(s => s.status_c === "Active"));
       setAssignments(assignmentsData);
       setGrades(gradesData);
     } catch (err) {
@@ -50,8 +50,8 @@ const [isFormOpen, setIsFormOpen] = useState(false);
     loadGradesData();
   }, []);
 
-  const getGradeForStudent = (studentId, assignmentId) => {
-    return grades.find(g => g.studentId === studentId && g.assignmentId === assignmentId);
+const getGradeForStudent = (studentId, assignmentId) => {
+    return grades.find(g => g.student_id_c === studentId && g.assignment_id_c === assignmentId);
   };
 
   const getInitials = (firstName, lastName) => {
@@ -89,19 +89,21 @@ const [isFormOpen, setIsFormOpen] = useState(false);
     try {
       const existingGrade = getGradeForStudent(studentId, assignmentId);
       
-      if (existingGrade) {
+if (existingGrade) {
         await gradeService.update(existingGrade.Id, {
-          ...existingGrade,
-          score: numericScore,
-          submittedDate: new Date().toISOString().split("T")[0]
+          student_id_c: studentId,
+          assignment_id_c: assignmentId,
+          score_c: numericScore,
+          submitted_date_c: new Date().toISOString().split("T")[0],
+          comments_c: existingGrade.comments_c || ""
         });
       } else {
         await gradeService.create({
-          studentId: studentId,
-          assignmentId: assignmentId,
-          score: numericScore,
-          submittedDate: new Date().toISOString().split("T")[0],
-          comments: ""
+          student_id_c: studentId,
+          assignment_id_c: assignmentId,
+          score_c: numericScore,
+          submitted_date_c: new Date().toISOString().split("T")[0],
+          comments_c: ""
         });
       }
 
@@ -120,18 +122,18 @@ const [isFormOpen, setIsFormOpen] = useState(false);
     }
   };
 
-  const calculateStudentAverage = (studentId) => {
-    const studentGrades = grades.filter(g => g.studentId === studentId && g.score !== null);
+const calculateStudentAverage = (studentId) => {
+    const studentGrades = grades.filter(g => g.student_id_c === studentId && g.score_c !== null);
     if (studentGrades.length === 0) return null;
 
     let totalPoints = 0;
     let earnedPoints = 0;
 
     studentGrades.forEach(grade => {
-      const assignment = assignments.find(a => a.Id === grade.assignmentId);
+      const assignment = assignments.find(a => a.Id === grade.assignment_id_c);
       if (assignment) {
-        totalPoints += assignment.totalPoints;
-        earnedPoints += grade.score;
+        totalPoints += assignment.total_points_c;
+        earnedPoints += grade.score_c;
       }
     });
 
@@ -251,7 +253,7 @@ const [isFormOpen, setIsFormOpen] = useState(false);
               <div>
                 <p className="text-sm font-medium text-green-700">Grades Entered</p>
                 <p className="text-2xl font-bold text-green-800">
-                  {grades.filter(g => g.score !== null).length}
+{grades.filter(g => g.score_c !== null).length}
                 </p>
               </div>
               <ApperIcon name="CheckCircle" className="w-8 h-8 text-green-600" />
@@ -266,17 +268,17 @@ const [isFormOpen, setIsFormOpen] = useState(false);
                 <p className="text-sm font-medium text-yellow-700">Class Average</p>
                 <p className="text-2xl font-bold text-yellow-800">
                   {(() => {
-                    const validGrades = grades.filter(g => g.score !== null);
+const validGrades = grades.filter(g => g.score_c !== null);
                     if (validGrades.length === 0) return "—";
                     
-                    let totalPoints = 0;
+let totalPoints = 0;
                     let earnedPoints = 0;
                     
                     validGrades.forEach(grade => {
-                      const assignment = assignments.find(a => a.Id === grade.assignmentId);
+                      const assignment = assignments.find(a => a.Id === grade.assignment_id_c);
                       if (assignment) {
-                        totalPoints += assignment.totalPoints;
-                        earnedPoints += grade.score;
+                        totalPoints += assignment.total_points_c;
+                        earnedPoints += grade.score_c;
                       }
                     });
                     
@@ -304,14 +306,14 @@ const [isFormOpen, setIsFormOpen] = useState(false);
               <div className="font-semibold text-secondary-700">Student</div>
               {assignments.map(assignment => (
                 <div key={assignment.Id} className="text-center">
-                  <div className="font-medium text-secondary-700 text-sm truncate" title={assignment.title}>
-                    {assignment.title}
+<div className="font-medium text-secondary-700 text-sm truncate" title={assignment.title_c}>
+                    {assignment.title_c}
                   </div>
                   <div className="text-xs text-secondary-500 mt-1">
-                    {assignment.totalPoints} pts
+                    {assignment.total_points_c} pts
                   </div>
                   <div className="text-xs text-secondary-500">
-                    Due: {formatDate(assignment.dueDate)}
+                    Due: {formatDate(assignment.due_date_c)}
                   </div>
                 </div>
               ))}
@@ -325,16 +327,16 @@ const [isFormOpen, setIsFormOpen] = useState(false);
                      className="grid gap-4 p-4 hover:bg-gray-50 transition-colors duration-200 items-center"
                      style={{ gridTemplateColumns: `200px repeat(${assignments.length}, 120px) 100px` }}>
                   <div className="flex items-center space-x-3">
-                    <Avatar
-                      initials={getInitials(student.firstName, student.lastName)}
+<Avatar
+                      initials={getInitials(student.first_name_c, student.last_name_c)}
                       size="sm"
                     />
                     <div>
                       <div className="font-medium text-gray-900 text-sm">
-                        {student.firstName} {student.lastName}
+                        {student.first_name_c} {student.last_name_c}
                       </div>
                       <div className="text-xs text-secondary-500">
-                        Grade {student.gradeLevel}
+                        Grade {student.grade_level_c}
                       </div>
                     </div>
                   </div>
@@ -346,14 +348,14 @@ const [isFormOpen, setIsFormOpen] = useState(false);
                     
                     return (
                       <div key={assignment.Id} className="flex flex-col items-center space-y-2">
-                        {existingGrade && existingGrade.score !== null ? (
+{existingGrade && existingGrade.score_c !== null ? (
                           <div className="text-center">
                             <GradePill 
-                              score={existingGrade.score} 
-                              totalPoints={assignment.totalPoints} 
+                              score={existingGrade.score_c} 
+                              totalPoints={assignment.total_points_c} 
                             />
                             <div className="text-xs text-secondary-500 mt-1">
-                              {existingGrade.score}/{assignment.totalPoints}
+                              {existingGrade.score_c}/{assignment.total_points_c}
                             </div>
                           </div>
                         ) : (
@@ -361,7 +363,7 @@ const [isFormOpen, setIsFormOpen] = useState(false);
                             <Input
                               type="number"
                               min="0"
-                              max={assignment.totalPoints}
+max={assignment.total_points_c}
                               step="0.5"
                               value={inputValue || ""}
                               onChange={(e) => handleGradeChange(student.Id, assignment.Id, e.target.value)}
@@ -375,7 +377,7 @@ const [isFormOpen, setIsFormOpen] = useState(false);
                                   handleGradeSubmit(student.Id, assignment.Id);
                                 }
                               }}
-                              placeholder={`0-${assignment.totalPoints}`}
+placeholder={`0-${assignment.total_points_c}`}
                               className="text-center text-sm"
                             />
                           </div>
