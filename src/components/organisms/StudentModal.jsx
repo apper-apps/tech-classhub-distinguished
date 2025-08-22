@@ -81,12 +81,10 @@ const gradeOptions = [
     { value: "12", label: "12th Grade" }
   ];
 
-  const academicYearOptions = [
-    { value: "Freshman", label: "Freshman" },
-    { value: "Sophomore", label: "Sophomore" },
-    { value: "Junior", label: "Junior" },
-    { value: "Senior", label: "Senior" },
-    { value: "Graduate", label: "Graduate" }
+const academicYearOptions = [
+    { value: "2023", label: "2023" },
+    { value: "2024", label: "2024" },
+    { value: "2025", label: "2025" }
   ];
 
   const statusOptions = [
